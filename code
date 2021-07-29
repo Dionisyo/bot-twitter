@@ -1,0 +1,45 @@
+var Twit = require("twit");
+require("dotenv").config();
+
+const mascaraBot = new Twit({
+
+    consumer_key: process.env.CONSUMER_KEY,  
+  
+    consumer_secret: process.env.CONSUMER_SECRET,    
+    access_token: process.env.ACCESS_TOKEN,  
+  
+    access_token_secret: process.env.ACCESS_TOKEN_SECRET,
+    timeout_ms: 60 * 1000
+});
+function acaoDomascaraBot() {
+    var myArray = [
+        "Não se esqueça da máscara emm!!",
+        "Máscara na mão, partiu mundão!!",
+        "Antes de sair de casa, não se esqueça da máscara!",
+        "Por favor, não se esqueça da máscara!",
+        "Estou aqui mais uma vez para você usar a máscara, como adivinhou?",
+        "Esqueça tudo menos a sua máscara!",
+        "Meu botdeus não se esqueça..não se esqueça da máscara :'("
+      ];
+      var randomItem = myArray[Math.floor(Math.random()*myArray.length)];
+
+    var postTweet = randomItem;
+    mascaraBot.post(
+       
+       'statuses/update', 
+       {status: postTweet},
+       function(err, data, response) { 
+          
+          if (err) {
+             
+             console.log("ERRO: " + err);                    
+             return false;
+          }
+   
+          console.log("Tweet postado com sucesso!\n");       
+  
+       }
+    )
+ }
+ acaoDomascaraBot();
+ setInterval(acaoDomascaraBot, 900000);
